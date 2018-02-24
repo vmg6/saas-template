@@ -16,7 +16,7 @@
 * build & run
 ```
   > ./build.sh
-  > ./up.sh -d
+  > sudo ./up.sh -d
 ```
 
 ## API endpoints
