@@ -11,7 +11,7 @@
 ```
   > cd saas-template
   > cp .env.template .env
-  > cp setings.xml.template setings.xml
+  > cp settings.xml.template settings.xml
 ```
 * build & run
 ```
