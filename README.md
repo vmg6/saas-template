@@ -2,13 +2,15 @@
 # Software Engineering Course project template
 
 ## Setup dev environment
-* setup Talan project https://github.com/project-talan/talan-core/tree/latest
-* clone projects
+* Grab Ubuntu 16.04 based VM
+* Clone projects
 ```
-  > cd ~/projects
+  > cd ~
+  > mkdir projects
+  > cd projects
   > git clone https://github.com/swe-course/saas-template.git
 ```
-* prepare .env file
+* Prepare local env configuration files
 ```
   > cd saas-template
   > cp .env.template .env
