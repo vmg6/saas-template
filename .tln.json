@@ -1,0 +1,39 @@
+{
+  "env": {
+  },
+  "stages":{
+  },
+  "components":[
+    {
+      "id":"services",
+      "components":[
+        {
+          "id":"api",
+          "inherits":["java/maven"],
+          "stages":{
+            "build":{},
+            "exec":{}
+          }
+        }
+      ]
+    },
+    {
+      "id":"static",
+      "components":[
+        {
+          "id":"web",
+          "inherits":["angular"],
+          "stages":{
+            "install":{
+              "command":"npm install"
+            },
+            "build":{},
+            "serve":{
+              "command":"ng serve --host 0.0.0.0 --port 4201"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
