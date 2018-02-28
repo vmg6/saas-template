@@ -12,12 +12,12 @@
 ```
   > cd saas-template
   > cp .env.template .env
-  > cp setings.xml.template setings.xml
+  > cp settings.xml.template settings.xml
 ```
 * build & run
 ```
   > ./build.sh
-  > ./up.sh -d
+  > sudo ./up.sh -d
 ```
 
 ## API endpoints
