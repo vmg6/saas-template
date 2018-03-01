@@ -10,9 +10,10 @@
   > cd projects
   > git clone https://github.com/swe-course/saas-template.git
 ```
-* Prepare local env configuration files
+* Install prerequisites, Prepare local env configuration files
 ```
   > cd saas-template
+  > sudo ./prereq.sh
   > cp .env.template .env
   > cp settings.xml.template settings.xml
 ```
