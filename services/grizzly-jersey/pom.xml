@@ -5,7 +5,7 @@
   <groupId>org.swecourse.services</groupId>
   <artifactId>api</artifactId>
   <packaging>jar</packaging>
-  <version>18.2.0-SNAPSHOT</version>
+  <version>18.3.0-SNAPSHOT</version>
   <name>api</name>
 
   <properties>

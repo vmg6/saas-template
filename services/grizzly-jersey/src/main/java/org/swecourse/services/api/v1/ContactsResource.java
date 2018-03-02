@@ -10,6 +10,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PATCH;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
@@ -64,6 +65,12 @@ public class ContactsResource {
       return Response.ok().entity(ApiResponse.build(contact)).build();
     }
     return Response.status(Response.Status.NOT_FOUND).build();
+  }
+  @OPTIONS
+  @Path("/{contactId}")
+  public Response getContactByIdOptions(@Context UriInfo uriInfo, @PathParam("contactId") Integer contactId) {
+    logger.info(uriInfo.getRequestUri());
+    return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
   }
 
   /**

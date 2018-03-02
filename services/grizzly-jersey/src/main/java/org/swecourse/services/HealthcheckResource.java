@@ -1,12 +1,14 @@
 package org.swecourse.services;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.HEAD;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Response;
 
 
 import org.apache.log4j.Logger;
@@ -29,5 +31,9 @@ public class HealthcheckResource {
   public String getIt(@Context UriInfo uriInfo) {
     logger.info(uriInfo.getRequestUri());
     return "live";
+  }
+  @HEAD
+  public Response getItHead(@Context UriInfo uriInfo) {
+    return Response.status(Response.Status.METHOD_NOT_ALLOWED).build();
   }
 }
