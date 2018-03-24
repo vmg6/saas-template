@@ -99,7 +99,7 @@ node {
   }
   
   stage("Integration testing") {
-        sh './up.sh -d'
+        sh 'sudo ./up.sh -d'
         git url: 'https://github.com/vmg6/saas-fremework-camp.git'
   }
   //
