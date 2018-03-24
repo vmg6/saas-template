@@ -99,11 +99,7 @@ node {
   }
   
   stage("Integration testing") {
-    git url: 'https://github.com/vmg6/saas-fremework-camp.git'
-    sh("
-        ./up.sh -d
-        mvn clean test -Dservers=env1
-    ")
+        echo "test"
   }
   //
     stage('Request approval for deploy to Stage') {
