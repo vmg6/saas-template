@@ -103,7 +103,7 @@ node {
     sh('''
         ./up.sh -d
         mvn clean test -Dservers=env1
-    ")
+    ''')
   }
   //
     stage('Request approval for deploy to Stage') {
