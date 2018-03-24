@@ -90,7 +90,7 @@ node {
   }
   //
   //
-  stage('Deploy & Publish') {
+  stage('Deploy to QA Stage') {
     if (pullRequest){
     } else {
       sh "./upload.sh ${groupId} ${artifactId} ${version} ./services/grizzly-jersey/target"
@@ -101,4 +101,21 @@ node {
   stage("Integration testing") {
     echo "Integration testing"
   }
+  //
+    stage('Request approval for deploy to Stage') {
+      script {
+          timeout(time:10, unit:'MINUTES') {
+              while (true) {
+                  userPasswordInput = input(id: 'userPasswordInput',
+                      message: 'Please approve deploy to Stage. Enter password to proceed.',
+                      parameters: [[$class: 'StringParameterDefinition', defaultValue: '',  name: 'Password']])
+                  if (userPasswordInput=='Yes') { break }
+              }
+          }
+      }
+    }
+    //
+    stage('Deploy to Stage') {
+        // TBD
+      }
 }
