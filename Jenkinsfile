@@ -99,7 +99,8 @@ node {
   }
   
   stage("Integration testing") {
-        echo "test"
+        sh './up.sh -d'
+        git url: 'https://github.com/vmg6/saas-fremework-camp.git'
   }
   //
     stage('Request approval for deploy to Stage') {
