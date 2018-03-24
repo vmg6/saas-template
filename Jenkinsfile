@@ -97,5 +97,8 @@ node {
     }
     //archiveArtifacts artifacts: 'mobile/platforms/android/build/outputs/apk/*.apk'
   }
-  //
+  
+  stage("Integration testing") {
+    echo "Integration testing"
+  }
 }
