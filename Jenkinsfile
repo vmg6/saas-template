@@ -15,8 +15,8 @@ node {
   echo "NEXUS_REPO: ${NEXUS_REPO}"
   echo "NEXUS_USER: ${NEXUS_USER}"
   echo "NEXUS_PASS: ${NEXUS_PASS}"
-  echo "SERVICES_GJ_PORT: ${SERVICES_GJ_PORT}" 
-  
+  echo "SERVICES_GJ_PORT: ${SERVICES_GJ_PORT}"
+
   stage('Clone sources') {
     //
     def scmVars = checkout scm
@@ -47,7 +47,7 @@ node {
     sh "cat ./.env"
     sh "envsubst < settings.xml.template > settings.xml"
     sh "cat ./settings.xml"
-  }  
+  }
   //
   stage('Build & Unit tests') {
     sh './build.sh'
@@ -97,13 +97,11 @@ node {
     }
     //archiveArtifacts artifacts: 'mobile/platforms/android/build/outputs/apk/*.apk'
   }
-  
+
+  //
   stage("Integration testing") {
-        sh "pushd services/grizzly-jersey"
-        sh "./run.sh"
         git url: 'https://github.com/vmg6/saas-fremework-camp.git'
         sh "mvn clean test -Dservers=env1"
-        sh "popd"
   }
 
   //
