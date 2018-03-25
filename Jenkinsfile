@@ -99,6 +99,7 @@ node {
   }
 
   //
+  //
   stage("Integration testing") {
         sh "./integration-test.sh"
   }
