@@ -101,6 +101,9 @@ node {
   //
   stage("Integration testing") {
         sh "./integration.sh"
+        git url: 'https://github.com/vmg6/saas-fremework-camp.git'
+        sh "mvn clean test -Dservers=env1"
+        sh "fuser -k 80/tcp"
   }
 
   //
