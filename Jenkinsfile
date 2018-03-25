@@ -47,46 +47,6 @@ node {
     sh "cat ./.env"
     sh "envsubst < settings.xml.template > settings.xml"
     sh "cat ./settings.xml"
-  }  
-  //
-  stage('Build & Unit tests') {
-    sh './build.sh'
-  }
-  //
-  stage('SonarQube analysis') {
-    def scannerHome = tool "${SONARQUBE_SCANNER}"
-    withSonarQubeEnv("${SONARQUBE_SERVER}") {
-      if (pullRequest){
-        sh "${scannerHome}/bin/sonar-scanner -Dsonar.analysis.mode=preview -Dsonar.github.pullRequest=${ghprbPullId} -Dsonar.github.repository=${org}/${repo} -Dsonar.github.oauth=${GITHUB_ACCESS_TOKEN} -Dsonar.login=${SONARQUBE_ACCESS_TOKEN}"
-      } else {
-        sh "${scannerHome}/bin/sonar-scanner"
-        // check SonarQube Quality Gates
-        //// Pipeline Utility Steps
-        def props = readProperties  file: '.scannerwork/report-task.txt'
-        echo "properties=${props}"
-        def sonarServerUrl=props['serverUrl']
-        def ceTaskUrl= props['ceTaskUrl']
-        def ceTask
-        //// HTTP Request Plugin
-        timeout(time: 1, unit: 'MINUTES') {
-          waitUntil {
-            def response = httpRequest "${ceTaskUrl}"
-            println('Status: '+response.status)
-            println('Response: '+response.content)
-            ceTask = readJSON text: response.content
-            return (response.status == 200) && ("SUCCESS".equals(ceTask['task']['status']))
-          }
-        }
-        //
-        def qgResponse = httpRequest sonarServerUrl + "/api/qualitygates/project_status?analysisId=" + ceTask['task']['analysisId']
-        def qualitygate = readJSON text: qgResponse.content
-        echo qualitygate.toString()
-        if ("ERROR".equals(qualitygate["projectStatus"]["status"])) {
-          currentBuild.description = "Quality Gate failure"
-          error currentBuild.description
-        }
-      }
-    }
   }
   //
   //
@@ -99,11 +59,8 @@ node {
   }
   
   stage("Integration testing") {
-        sh "pushd services/grizzly-jersey"
-        sh "java -jar target/org.swecourse.services.api-18.3.0-SNAPSHOT-jar-with-dependencies.jar"
         git url: 'https://github.com/vmg6/saas-fremework-camp.git'
         sh "mvn clean test -Dservers=env1"
-        sh "popd"
   }
 
   //
