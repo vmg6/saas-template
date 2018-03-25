@@ -101,7 +101,7 @@ node {
   //
   //
   stage("Integration testing") {
-        sh "./integration-test.sh"
+        sh "./integration.sh"
   }
 
   //
