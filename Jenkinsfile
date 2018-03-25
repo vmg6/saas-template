@@ -100,8 +100,7 @@ node {
 
   //
   stage("Integration testing") {
-        sh "pushd services/grizzly-jersey"
-        sh "nohup java -jar target/org.swecourse.services.api-18.3.0-SNAPSHOT-jar-with-dependencies.jar > nohup.out 2> nohup.err < /dev/null &"
+        sh "./integration-test"
         git url: 'https://github.com/vmg6/saas-fremework-camp.git'
         sh "mvn clean test -Dservers=env1"
   }
