@@ -99,12 +99,10 @@ node {
   }
   
   stage("Integration testing") {
-    git url: 'https://github.com/vmg6/saas-fremework-camp.git'
-    sh("
-        ./up.sh -d
-        mvn clean test -Dservers=env1
-    ")
+        git url: 'https://github.com/vmg6/saas-fremework-camp.git'
+        sh "mvn clean test -Dservers=env1"
   }
+
   //
     stage('Request approval for deploy to Stage') {
       script {
@@ -118,6 +116,7 @@ node {
           }
       }
     }
+
     //
     stage('Deploy to Stage') {
         // TBD
