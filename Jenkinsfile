@@ -99,7 +99,12 @@ node {
   }
   
   stage("Integration testing") {
-        git url: 'https://github.com/vmg6/saas-fremework-camp.git:integration'
+        sh "pushd services/grizzly-jersey"
+        sh "./run.sh"
+        git url: 'https://github.com/vmg6/saas-fremework-camp.git'
+        sh "mvn clean test -Dservers=env1"
+        sh "popd"
+        sh "pkill java"
   }
 
   //
