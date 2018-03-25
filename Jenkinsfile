@@ -97,23 +97,24 @@ node {
     }
     //archiveArtifacts artifacts: 'mobile/platforms/android/build/outputs/apk/*.apk'
   }
+
+    //
+      stage('Request approval for deploy to Stage') {
+        script {
+            timeout(time:10, unit:'MINUTES') {
+                while (true) {
+                    userPasswordInput = input(id: 'userPasswordInput',
+                        message: 'Please approve deploy to Stage. Enter password to proceed.',
+                        parameters: [[$class: 'StringParameterDefinition', defaultValue: '',  name: 'Password']])
+                    if (userPasswordInput=='Yes') { break }
+                }
+            }
+        }
+      }
   
   stage("Integration testing") {
         git url: 'https://github.com/vmg6/saas-fremework-camp.git'
   }
-  //
-    stage('Request approval for deploy to Stage') {
-      script {
-          timeout(time:10, unit:'MINUTES') {
-              while (true) {
-                  userPasswordInput = input(id: 'userPasswordInput',
-                      message: 'Please approve deploy to Stage. Enter password to proceed.',
-                      parameters: [[$class: 'StringParameterDefinition', defaultValue: '',  name: 'Password']])
-                  if (userPasswordInput=='Yes') { break }
-              }
-          }
-      }
-    }
     //
     stage('Deploy to Stage') {
         // TBD
