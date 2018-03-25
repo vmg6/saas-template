@@ -104,7 +104,6 @@ node {
         git url: 'https://github.com/vmg6/saas-fremework-camp.git'
         sh "mvn clean test -Dservers=env1"
         sh "popd"
-        sh "pkill java"
   }
 
   //
